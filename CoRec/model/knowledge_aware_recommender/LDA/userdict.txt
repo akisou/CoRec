@@ -1,0 +1,7 @@
+# userdict file for words you wanna keep
+上海
+中山
+杭州
+郑州
+北京
+复旦

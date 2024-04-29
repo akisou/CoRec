@@ -1,0 +1,62 @@
+# if load best model haven been trained
+load_best_model: true           # if load best model haven been trained
+saved_model_file: COREC_best_model.pth
+# model config
+embedding_size: 64              # (int) The embedding size of users, items, entities and relations.
+n_iter: 1                       # (int) The number of iterations when computing entity representation.
+neighbor_sample_size: 4         # neighbor num
+aggregator: 'sum'               # (str) The aggregator for GNN ranging in ['sum', 'neighbor', 'concat'].
+reg_weight: 1e-3               # (float) The L2 regularization weight.
+node_dropout_rate: 0.5          # (float) The node dropout rate in GCN layer.
+mess_dropout_rate: 0.0          # (float) The message dropout rate in GCN layer.
+sim_regularity: 1e-3            # (float) The intents independence loss weight.
+context_hops: 2                 # (int) The number of context hops in GCN layer.
+n_factors: 4                    # (int) The number of user intents.
+ind: 'cosine'                   # (float) The intents independence loss type.
+temperature: 0.2                # (float) The temperature parameter used in loss calculation.
+ # (f  # (float)# (str, optional) The loss type used in this model.
+# dataset config
+field_separator: "\t" #指定数据集field的分隔符
+seq_separator: " " #指定数据集中token_seq或者float_seq域里的分隔符
+USER_ID_FIELD: user_id #指定用户id域
+ITEM_ID_FIELD: item_id #指定物品id域
+RATING_FIELD: rating #指定打分rating域
+HEAD_ENTITY_ID_FIELD: head_id #指定头实体id域
+TAIL_ENTITY_ID_FIELD: tail_id #指定尾实体id域
+RELATION_ID_FIELD: relation_id #指定关系id域
+ENTITY_ID_FIELD: entity_id #指定实体id域
+PROFILE_FIELD: profile # profile 文本域
+QUERY_FIELD: query # query 文本域
+DIALOG_FIELD: dialog # dialog 文本域
+DEPART_FIELD: department # department域
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+TXT_EMBEDDING_FLAG: 1
+TXT_EMBEDDING_DIM: 768
+encoding: utf-8
+#指定从什么文件里读什么列
+load_col:
+    inter: [user_id, item_id, rating]
+    user: [user_id, department, query_time, first_response_time]
+    item: [item_id, department, doctor_title, education_title, consultation_amount, patient_recommendation_score, total_access, total_article, total_patient, total_evaluation, thanks_letter_num, thanks_present, active_years, cure_satisfaction, attitude_satisfaction]
+    kg: [head_id, relation_id, tail_id]
+    link: [item_id, entity_id]
+lowest_val:
+    rating: 1
+# training settings
+epochs: 70 #训练的最大轮数
+train_batch_size: 1024 #训练的batch_size
+learner: adam #使用的pytorch内置优化器
+learning_rate: 0.01 #学习率
+train_neg_sample_num: 1 #负采样数目
+eval_step: 1 #每次训练后做evalaution的次数
+stopping_step: 10 #控制训练收敛的步骤数，在该步骤数内若选取的评测标准没有什么变化，就可以提前停止了
+evalution settings: RO_RS, full
+
+eval_args:
+  group_by: ~
+  split: {'RS':[0.8, 0.1, 0.1]}
+  mode: uni100
+  order: RO
+valid_metric: AUC
+metrics: ['AUC', 'RMSE', 'MAE']
