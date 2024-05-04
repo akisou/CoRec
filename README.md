@@ -1,7 +1,7 @@
 # Bridging Expertise: Doctor Recommendations for Cross-Disciplinary Collaborations in Online Medical Consultations
 This is our Pytorch implementation for the paper:
 > Xiaonan Wu, Zhiying Li, Hongxun Jiang and Xun Liang(2024). Bridging Expertise: Doctor Recommendations for Cross-Disciplinary Collaborations in Online Medical Consultations
-# [Paper in Arxiv]. In CSCW 2024
+# In CSCW 2024
 
 ## Introduction
 Doctor Recommendations for Cross-Disciplinary Collaborations in Online Medical Consultations (CoRec) is an 
